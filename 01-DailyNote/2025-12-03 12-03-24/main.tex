@@ -1,0 +1,49 @@
+\documentclass[11pt,oneside,a4paper]{article}
+% 导言区配置
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+% \usepackage{hyperref}
+% \usepackage{geometry}
+% 生成封面
+\title{矩阵及其运算}
+\author{朝暮}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newtheorem{definition}{定义}
+\newtheorem{theorem}{定理}
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{5pt}
+
+\begin{theorem}[带 Lagrange 余项的 Taylor 多项式]
+设函数 $f(x)$ 在点 $x_0$ 的某邻域 $O(x_0)$ 内具有 $n+1$ 阶导数，则对任意 $x \in O(x_0)$，存在 $\xi$ 介于 $x$ 与 $x_0$ 之间，使得
+
+\begin{equation*}
+    f(x) = f(x_0) + \frac{f'(x_0)}{1!}(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + r_n(x).
+\end{equation*}
+其中，$r_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - x_0)^{n+1}$ 称为 Lagrange 余项。
+\end{theorem}
+
+\begin{proof}[证明]$\qquad$
+    \begin{enumerate}
+        \item 先介绍一种构造性的证明。见菲赫金哥尔茨《微积分学教程》、陈纪修《数学分析》等。
+        
+        固定 $x_0 \in O(x_0)$，构造辅助函数
+
+        \begin{equation*}
+            \begin{aligned}
+                F(t) &= f(x) - \left( f(t) + f^{\prime}(t) (x-t) +\frac{f^{\prime}(t)}{2!}(x-t)^2 +\cdots+\frac{f^{(n)(t)}}{n!}(x-t)^{n}\right) \\
+                &=f(x) - \sum_{k=0}^{n} \frac{f^{(k)}(t)}{k!}(x-t)^k.
+            \end{aligned}
+        \end{equation*}
+
+        \begin{equation*}
+            H(t) = (x-t)^{n+1}.
+        \end{equation*}
+    \end{enumerate}
+\end{proof}
+\end{document}
