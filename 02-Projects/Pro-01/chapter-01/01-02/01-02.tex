@@ -1,0 +1,276 @@
+\documentclass[11pt,oneside,a4paper]{article}
+% 导言区配置
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+% \usepackage{hyperref}
+% \usepackage{geometry}
+% 生成封面
+\title{引言：高等代数的研究对象}
+\author{朝暮}
+\date{\today}
+
+% 文档正文
+\begin{document}
+\maketitle
+\newtheorem{definition}{定义}
+\newtheorem{example}{例}
+
+
+作为高等代数的第一节课，需要先搞清楚一件事情——我们可以从这门课程中学到什么。换言之，高等代数在研究什么？
+
+我们在中学阶段就已经开始接触``代数''了，对``代数''的第一印象就是所谓的``用字母表示数''。
+
+实际问题中常含有一些``已知量''与``未知量''。
+
+\begin{itemize}
+    \item[*] \textbf{未知量}：通常用 $x,y,z,\cdots$ 等字母来表示；
+    \item[*] \textbf{已知量}：如果是具体的问题，已知量通常是具体的数字；如果是抽象问题，已知量一般用 $a,b,c,\cdots$ 来表示。 
+\end{itemize}
+
+基于实际问题，可以找出等量关系，进而列出含有未知量的等式，这就是\textbf{方程}。
+
+\paragraph{一元一次方程} 在初中一年级，我们首先接触到的就是一元一次方程，即形如
+
+\begin{equation*}
+    ax+b =c
+\end{equation*}
+的方程。
+
+\begin{proof}
+    当 $a\ne 0$ 时，可以简单地通过四则运算，得到方程的解：
+
+    \begin{equation*}
+        x = \frac{c-b}{a}.
+    \end{equation*}
+\end{proof}
+
+值得注意的是，上述一元一次方程的解是一个``未知量在左边''的等式，这被称为一元一次方程的\textbf{求根公式}。
+
+\paragraph{一元二次方程} 在初中三年级，我们又接触了一元二次方程，即形如
+
+\begin{equation*}
+    ax^2 + bx + c = 0
+\end{equation*}
+的方程。
+
+\begin{proof}
+    显然，一元二次方程也存在求根公式。
+
+    \begin{itemize}
+        \item 若$a > 0$ 且判别式 $\Delta = b^2-4ac\ge 0$，方程有两个解，可以用如下的求根公式来表示：
+        \begin{equation*}
+            x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}.
+        \end{equation*}
+        \item 若 $a \ne 0$ 且判别式 $\Delta = b^2-4ac =0$，方程有唯一解。
+        \item 若 $a = 0$，方程\textbf{退化} 为一元一次方程。
+    \end{itemize}
+\end{proof}
+
+
+
+\paragraph{一元高次方程} 我们将方程中非零项的最高次数称为该方程的\textbf{次数}，抓住方程``次数''的特征，自然而然地可以将其推广至一元三次方程、一元四次方程等。方便起见，我们将次数高于 $2$ 的方程统称为\textbf{一元高次方程}。
+
+一元高次方程是否有根？这是经典代数学的中心问题。具体来说，需要关心这样一些事情：
+
+\begin{itemize}
+    \item 一元高次方程是否存在根？
+    \item 如果存在根，是否可求？如果可求，是否存在统一的求根公式？
+\end{itemize}
+
+
+前面的内容是通过抓住方程``次数''的特征，从一次方程推广到高次方程，进而引出经典代数学的中心问题。然而实际问题往往复杂得多，比如方程所涉及到的未知量常常不止一个，下面我们就抓住方程未知量的个数，也就是``元''的特征进行推广。
+
+
+\paragraph{二元一次方程}含有两个未知量，且每个未知量都是一次的，称这样方程为\textbf{二元一次方程}。如
+
+\begin{equation*}
+    ax+by+c = 0.
+\end{equation*}
+
+\paragraph{三元一次方程}含有三个未知量，且每个未知量都是一次的，称这样的方程为\textbf{三元一次方程}。如
+
+\begin{equation*}
+    ax+by+cd + e = 0.
+\end{equation*}
+
+\paragraph{一元$n$次方程} 一般地，若方程含有$n$个未知量，且每个未知量都是一次的，则称这样的方程为\textbf{一元 $n$ 次方程}。
+
+
+可以考虑一元$n$次方程的几何意义。联想中学阶段学习过的平面解析几何知识：一个二元一次方程可以对应到平面直角坐标系中的一条直线，
+
+\begin{example}
+    考虑一元二次方程 $3x+2y=1$ 在平面直角坐标系中的图像。
+
+    \centering
+    \includegraphics[scale=0.9]{figures/figure01.png}
+\end{example}
+
+可以借用几何直观，通常可将$n$元一次方程称作\textbf{$n$元线性方程}。
+
+显然，方程的未知量个数变多后，仅凭一个方程是无法求解出来未知量的，需要多个方程，进而组成了所谓的``方程组''。
+
+\paragraph{二元一次方程组} 有两个一元二次方程构成的方程组。如 
+
+\begin{equation*}
+    \begin{cases}
+        a_{11}x_1 + a_{12}x_2 = b_1 \\
+        a_{21}x_1 + a_{22}x_2 = b_2
+    \end{cases}
+\end{equation*}
+
+\paragraph{三元一次方程组} 有三个一元二次方程构成的方程组。如 
+
+\begin{equation*}
+    \begin{cases}
+        a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = b_1 \\
+        a_{21}x_1 + a_{22}x_2 + a_{23}x_3 = b_2 \\
+        a_{31}x_1 + a_{32}x_2 + a_{33}x_3 = b_3
+    \end{cases}
+\end{equation*}
+
+以上是我们在中学阶段所熟知的关于一元二次、三次方程组的形式。需要特别指出的是，方程组中所含方程的个数与方程未知量的个数并无必要联系。如三元一次方程组，可以包含三个方程、也可以包含四个，或者更多。
+
+\begin{example}
+    \begin{equation*}
+        \begin{cases}
+            x_1+3x_2+x_3=2\\
+            3x_1+4x_2+2x_3=9\\
+            -x_1-5x_2+4x_3=10\\
+            2x_1+7x_2+x_3=1\\
+        \end{cases}
+    \end{equation*} \label{exam-2}
+\end{example}
+
+
+自然而然地，可以抓住方程组``元''的特征，将其推广到任意多个未知量的情形。
+
+\paragraph{n元一次方程组} 一般地，由若干个一元$n$次方程构成的方程组称为$n$元一次方程组。借用几何直观，可将其称作$n$元线性方程组。其一般形式如下：
+
+\begin{equation}
+    \begin{cases}
+        a_{11}x_1+a_{12}x_2+\cdots +a_{1n}x_n=b_1\\
+        a_{21}x_1+a_{22}x_2+\cdots +a_{2n}x_n=b_2\\
+        \cdots \cdots\\
+        a_{s1}x_1+a_{s2}x_2+\cdots +a_{sn}x_n=b_s\\
+    \end{cases}\label{n-bodys}
+\end{equation}
+
+其中，$a_{ij}$（$1\le i \le s,1\le j \le n$）称为方程组（\ref{n-bodys}）的\textbf{系数}；$b_{j}$（$1\le j \le n$）称为其\textbf{常数项}。
+
+如何对$n$元线性方程组进行求解呢？在中学阶段，我们已经学习过如何对二元、三元线性方程组进行求解，常使用的方法是：代入消元法、加减消元法。可以肯定的是，这两种方法对于一般的$n$元线性方程组依然有效。为了使其更加规范、乃至可以使用现代计算机进行求解，后续将引入所谓的``矩阵消元法''。
+
+\paragraph{注} 计算机的发展，也极大地推动了线性方程组理论的发展。许多过去难解的、乃至解不了的方程组，如今凭借计算机可以方便得进行求解。
+
+
+回顾对二元、三元线性方程组的求解过程，有以下的共同点：
+
+\begin{enumerate}
+    \item 仅仅对系数项以及常数项进行了运算；
+    \item 由字母表示的未知量并未参与运算。
+\end{enumerate}
+
+为了简化书写，可以将方程组的所有系数``抽离''出来。
+
+\begin{example}
+    将 例\ref{exam-2}方程组的所有系数抽离出来，按照原有次序，可以排列成如下的数表。
+
+    \begin{equation*}
+        \left[ \begin{matrix}
+            1 & 3 & 1 & 2 \\
+            3 & 4 & 2 & 9 \\
+            -1 & -5 & 4 & 10 \\
+            2 & 7 & 1 & 1
+        \end{matrix}\right]
+    \end{equation*}
+\end{example}
+
+
+对于一般的$n$元线性方程组，可以按照同样的操作，将其所有的系数项按原有次序排列成一张数表，这就是``矩阵''。
+
+
+\begin{equation*}
+    \left\{ \begin{array}{c}
+        a_{11}x_1+a_{12}x_2+\cdots +a_{1n}x_n=b_1\\
+        a_{21}x_1+a_{22}x_2+\cdots +a_{2n}x_n=b_2\\
+        \cdots\cdots\\
+        a_{s1}x_1+a_{s2}x_2+\cdots +a_{sn}x_n=b_s\\
+    \end{array} \right. \xrightarrow{\text{抽离系数}}\left[ \begin{matrix}
+        a_{11}&		a_{12}&		\cdots&		a_{1n}\\
+        a_{21}&		a_{21}&		\cdots&		a_{2n}\\
+        \vdots&		\vdots&		\ddots&		\vdots\\
+        a_{s1}&		a_{s2}&		\cdots&		a_{sn}\\
+    \end{matrix} \right] 
+\end{equation*}
+
+\paragraph{矩阵} 由$s\times n$个数排列成的$s$行、$n$列的数表称为矩阵，通常用大写字母$A$、$B$、$C$、$\cdots$来表示一个矩阵，如
+
+\begin{equation}
+    A = \left[\begin{matrix}
+        a_{11}&		a_{12}&		\cdots&		a_{1n}\\
+        a_{21}&		a_{21}&		\cdots&		a_{2n}\\
+        \vdots&		\vdots&		\ddots&		\vdots\\
+        a_{s1}&		a_{s2}&		\cdots&		a_{sn}\\
+    \end{matrix}\right] 
+\end{equation}
+
+\begin{example} 称
+    \begin{equation*}
+        A = \left[\begin{matrix}
+            a_{11}&		a_{12}&		\cdots&		a_{1n}\\
+            a_{21}&		a_{21}&		\cdots&		a_{2n}\\
+            \vdots&		\vdots&		\ddots&		\vdots\\
+            a_{s1}&		a_{s2}&		\cdots&		a_{sn}\\
+        \end{matrix}\right] 
+    \end{equation*}
+    为方程组（\ref{n-bodys}）的\textbf{系数矩阵}。
+\end{example}
+
+\begin{example}称
+    \begin{equation}
+        \bar A = \left[\begin{matrix}
+            a_{11}&		a_{12}&		\cdots&		a_{1n}&     b_1\\
+            a_{21}&		a_{21}&		\cdots&		a_{2n}&     b_2\\
+            \vdots&		\vdots&		\ddots&		\vdots&     \vdots\\
+            a_{s1}&		a_{s2}&		\cdots&		a_{sn}&     b_s\\
+        \end{matrix}\right] 
+    \end{equation}
+    为方程组（\ref{n-bodys}）的\textbf{增广矩阵}。
+\end{example}
+
+高等代数的出发点之一，就是$n$元线性方程组的求解问题。而研究$n$元线性方程组的解法，可以归结为对矩阵的研究。
+
+
+然而，仅仅了解了一般的$n$元线性方程组如何求解是远远不够的。面对一个具体的线性方程组，我们期望可以在求解之前，就能预先对其解的情况做一定的判断：是否有解？若有解，有多少解？特别是无解的方程组，解了半天才发现解不存在，就太浪费时间了。
+
+如何在实际求解前，就能得知方程组解的情况呢？可以借助于几何直观。
+
+\begin{example}
+    在平面几何中，二元一次方程可以表示一条直线，由两个二元一次方程构成的方程组就对应两条直线。由几何关系可知：平面内的两条直线可以平行；可以相交；可以重合。如果直线相交，则交点正是该方程组的解。
+    
+    \centering
+    \includegraphics[scale=0.75]{figures/figure02.png}
+\end{example}
+
+借助于几何直观，可以猜测，对于一般的$n$元线性方程组，其至少存在三种解的情况：有唯一解；有无穷多解；无解。原则上来讲，是否存在其它解的情况是需要进一步分析讨论的。比如恰好有两个解；恰好有三个解等等。
+
+如何建立这种方程组解的情况判别方法呢？要想找到一种统一的、普遍的判别方法，就不能拘泥于某些特例，而要从所有方程组的共通点着手。显而易见，方程组的系数项以及常数项可以作为突破点。而出于简化的目的，结合前面的讨论，我们的任务又可归结为研究方程组的系数矩阵以及增广矩阵。
+
+方程组的系数矩阵以及增广矩阵均由若干行构成，每一行又由若干个、按照一定次序排列的数构成。这里出现了``若干个数字的有序排列''，而类似的结构并不陌生。例如：平面坐标$(x,y)$；空间坐标$(x,y,z)$；物理时空坐标$(z,y,z,t)$……
+
+综合这些示例，可以抽象出``$n$元有序数组''的概念。
+
+
+\paragraph{n维向量空间} 考虑由所有$n$元有序组构成的集合，并且类比几何空间，可在其上引入加法、数量乘法两种运算，进而得到\textbf{$n$维向量空间}。
+
+进一步的分析表明，研究线性方程组解的判别方法，可以促使我们研究$n$维向量空间，这将在第3章展开细致讨论。
+
+此外，若$n$元线性方程组有无穷多解，则还可以通过研究$n$维向量空间的结构，来研究解集的结构。
+
+对于几何空间、$n$维向量空间，仍可抓住共同特征，抽象出``线性空间''的概念。
+
+既然已经通过$n$维向量空间解决了线性方程组的求解问题，为什么还要继续抽象出所谓的``线性空间''的概念呢？这就是数学的一大特点，当解决了某一类问题之后，应当沿着某一思路继续探索，以期得到新的理论，使其能够处理更广泛的问题。
+
+\end{document}
+

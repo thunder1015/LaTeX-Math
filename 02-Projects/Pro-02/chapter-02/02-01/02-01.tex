@@ -1,0 +1,498 @@
+\documentclass[11pt,oneside,a4paper]{article}
+% 导言区配置
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+% \usepackage{hyperref}
+% \usepackage{geometry}
+% 生成封面
+\title{矩阵及其运算}
+\author{朝暮}
+\date{\today}
+
+% 文档正文
+\begin{document}
+\maketitle
+\newtheorem{definition}{定义}
+\newtheorem{example}{例}
+\newtheorem{theorem}{定理}
+
+
+\begin{definition}[矩阵]
+    将 $m\times n$ 个数 $a_{ij}$（$1\le i\le m,~1\le j \le n$）排成一个矩形阵列，称为一个 $m\times n$ 级矩阵。表示为
+
+    \begin{equation*}
+        \left[ \begin{matrix}
+            a_{11}&		a_{12}&		\cdots&		a_{1n}\\
+            a_{21}&		a_{22}&		\cdots&		a_{2n}\\
+            \vdots&		\vdots&		\ddots&		\vdots\\
+            a_{m1}&		a_{m2}&		\cdots&		a_{mn}\\
+        \end{matrix} \right] 
+    \end{equation*}
+    简记作 $(a_{ij})_{m\times n}$.
+\end{definition}
+
+\begin{enumerate}
+    \item $a_{ij}$ 称为矩阵的第 $(i,j)$ 元素。
+    
+    \begin{itemize}
+        \item 若 $a_{ij} \in \mathbb{R},\forall i,j$，称为实矩阵；
+        \item 若 $a_{ij}\in \mathbb{C},\forall\i,j$，称为复矩阵；
+        \item 若 $a_{ij} = 0,\forall\i,j$，称为零矩阵；
+    \end{itemize}
+    \item 设 $(a_{ij})_{m\times n}$ 的行数与列数分别为 $m,n$，$m$ 与 $n$  不一定相同。若 $m = n$，则称其为方阵，记作 $(a_{ij})_{n\times n}$。
+    \item 讨论一下方阵 $A = (a_{ij})_{n\times n}$.
+    \begin{itemize}
+        \item $a_{11},a_{22},\cdots,a_{nn}$ 连成线，称为 $A$ 的对角线；$a_{1n},a_{2,n-1},\cdots,a_{n1}$ 连成线，称为 $A$ 的斜对角线；
+        \item 若 $a_{ij}=0,\forall i\ne j$ 称 $A$ 为对角阵；
+        \item 若 $a_{ij}=0.\forall i\ne j$ 且 $a_{ii}=1,\forall 1\le i\le n$，称 $A$ 对单位阵\footnote{之所以将其称为单位阵，因为其在矩阵乘法运算中起到单位元的作用。}。 
+        
+        \begin{equation*}
+            \begin{matrix}
+                \begin{array}{c}
+                \left[ \begin{matrix}
+                \underline{a_{11}}&		a_{12}&		\cdots&		a_{1n}\\
+                a_{21}&		\underline{a_{22}}&		\cdots&		a_{2n}\\
+                \vdots&		\vdots&		\ddots&		\vdots\\
+                a_{n1}&		a_{n2}&		\cdots&		\underline{a_{nn}}\\
+            \end{matrix} \right]\\
+                \text{对角线}\\
+            \end{array}&		\begin{array}{c}
+                \left[ \begin{matrix}
+                a_{11}&		0&		\cdots&		0\\
+                0&		a_{22}&		\cdots&		0\\
+                \vdots&		\vdots&		\ddots&		\vdots\\
+                0&		0&		\cdots&		a_{nn}\\
+            \end{matrix} \right]\\
+                \text{对角阵}\\
+            \end{array}&		\begin{array}{c}
+                \left[ \begin{matrix}
+                1&		0&		\cdots&		0\\
+                0&		1&		\cdots&		0\\
+                \vdots&		\vdots&		\ddots&		\vdots\\
+                0&		0&		\cdots&		1\\
+            \end{matrix} \right]\\
+                \text{单位阵}\\
+            \end{array}\\
+            \end{matrix}
+        \end{equation*}
+        
+        \item 若 $a_{ij}=0,\forall i<j$，称 $A$ 为下三角阵；
+        \item 若 $a_{ij}=0,\forall i<j$，称 $A$ 为上三角阵。
+        \begin{equation*}
+            \begin{matrix}
+                \left[ \begin{matrix}
+                a_{11}&		a_{12}&		\cdots&		a_{1n}\\
+                0&		a_{22}&		\cdots&		a_{2n}\\
+                \vdots&		\vdots&		\ddots&		\vdots\\
+                0&		0&		\cdots&		a_{nn}\\
+            \end{matrix} \right]&		\left[ \begin{matrix}
+                a_{11}&		0&		\cdots&		0\\
+                a_{21}&		a_{22}&		\cdots&		0\\
+                \vdots&		\vdots&		\ddots&		\vdots\\
+                a_{n1}&		a_{n2}&		\cdots&		a_{nn}\\
+            \end{matrix} \right]\\
+                \text{上三角阵}&		\text{下三角阵}\\
+            \end{matrix}
+        \end{equation*}
+    \end{itemize}
+\end{enumerate}
+
+\begin{definition}[矩阵相等]
+    对于给定的两个矩阵 $A= (a_{ij})_{m\times n}$，$B=(b_{ij})_{s\times t}$，则称 $A=B$ 当且仅当 $m=s,n=t,a_{ij}=b_{ij},\forall 1\le i \le m,1\le j \le n$.
+\end{definition}
+
+\begin{example}
+    \begin{equation*}
+        \left[ \begin{matrix}
+            0&		0\\
+            0&		0\\
+        \end{matrix} \right] \ne \left[ \begin{matrix}
+            0&		0&		0\\
+            0&		0&		0\\
+            0&		0&		0\\
+        \end{matrix} \right] ,\qquad \left[ \begin{matrix}
+            1&		0\\
+            0&		0\\
+        \end{matrix} \right] \ne \left[ \begin{matrix}
+            0&		1\\
+            0&		0\\
+        \end{matrix} \right] .
+    \end{equation*}
+\end{example}
+
+\begin{definition}[向量]
+    设 $A=(a_{ij})_{m\times n}$，则
+
+    \begin{enumerate}
+        \item 将 $(a_{i1},a_{i2},\cdots,a_{in})$ 称为 $A$ 的第 $i$ 个行向量；将 $(a_{1j}),a_{2j},\cdots,a_{mj}$ 称为 $A$ 的第 $j$ 个列向量。
+        \item 称 $1\times n$ 矩阵 $\left[ \begin{matrix}a_1&a_2&\cdots&a_n\\\end{matrix} \right] $ 为一个 $n$ 维行向量；称 $n\times 1$ 矩阵 $\left[ \begin{array}{c}a_1\\a_2\\\vdots\\a_n\\\end{array} \right]$ 为一个 $n$ 维列向量。
+    \end{enumerate}
+\end{definition}
+
+\newpage
+
+记 $M_{n}(\mathbb{R})$ 为所有 $n$ 阶实方阵构成的集合。即 $M_{n}(\mathbb{R}):=\{A\mid A \text{为实方阵}\}$，构成映射
+\begin{equation*}
+    \begin{aligned}
+        det:\quad M_n(\mathbb{R}) &\longrightarrow \mathbb{R}\\
+        A&\longmapsto |A|=\det(A).
+    \end{aligned}
+\end{equation*}
+
+思考如下两个问题：
+
+\begin{itemize}
+    \item $n$ 阶行列式的值 $|A|$ 能够在多大程度上反应矩阵 $A$ 的性质？
+    \item 映射 $det$ 具体怎样的性质？
+\end{itemize}
+
+
+\begin{definition}[矩阵的加、减法]
+    对于给定的两个矩阵 $A=(a_{ij})_{m\times n}$，$B=(b_{ij})_{m\times n}$，定义
+
+    \begin{equation*}
+        A \pm B :=(a_{ij} \pm b_{ij})_{m \times n}.
+    \end{equation*}
+\end{definition}
+
+
+\begin{example}
+    \begin{equation*}
+        \left[\begin{matrix}
+            1 &2 &0\\-1 &3 &1\\
+        \end{matrix}\right] +
+        \left[\begin{matrix}
+            1 &-2 &1\\-1 &-3 &0\\
+        \end{matrix}\right] = 
+        \left[\begin{matrix}
+            2 &0 &1\\-1 &0 &1\\
+        \end{matrix}\right].
+    \end{equation*}
+\end{example}
+
+
+\begin{example}
+    \begin{equation*}
+        A_{m\times n} + O_{m\times n} = A_{m \times n}.
+    \end{equation*}
+\end{example}
+
+\begin{definition}[矩阵的数乘]
+    对于给定的矩阵 $A=(a_{ij})_{m\times n}$，给定的常数 $c$，定义
+
+    \begin{equation*}
+        c\cdot A := (c\cdot a_{ij})_{m\times n}.
+    \end{equation*}
+\end{definition}
+
+基于矩阵的数乘运算，可以定义负矩阵。
+
+\begin{definition}[负矩阵]
+    对于给定的矩阵 $A=(a_{ij})_{m\times n}$，定义其负矩阵
+    \begin{equation*}
+        -A := (-1)\cdot A.
+    \end{equation*}
+\end{definition}
+
+\begin{example}
+    \begin{equation*}
+        2\cdot \left[
+            \begin{matrix}
+                1 & 2 \\ 3 & 4\\
+            \end{matrix}
+        \right] = 
+        \left[
+            \begin{matrix}
+                2 & 4\\
+                6 & 8
+            \end{matrix}
+        \right].
+    \end{equation*}
+\end{example}
+
+\newpage
+
+下面讨论上述矩阵运算的性质。
+
+\begin{theorem}[矩阵加法、数乘运算的性质]$\qquad$
+
+\begin{enumerate}
+    \item 加法性质：对于给定的矩阵 $A,B,C$，有以下性质
+    \begin{enumerate}
+        \item 交换律：$A+B=B+A$.
+        \item 结合律：$(A+B)+C=A+(B+C)$.
+        \item 零矩阵：$A+ O = A$.
+        \item 负矩阵：$A+ (-A) = (-A)+A=0$.
+    \end{enumerate}
+    \item 数乘性质：对于给定的矩阵 $A,B$，数 $c,d$，有以下性质
+    \begin{enumerate}
+        \item 关于数的分配律：$(c+d)\cdot A = c\cdot A + d \cdot A$.
+        \item 关于矩阵的分配律：$c\cdot (A+B) = c\cdot A + c \cdot B$.
+        \item 结合律：$(c\cdot d )\cdot A = c\cdot (d\cdot A)$.
+        \item 数乘零元：$0\cdot A = O$.
+    \end{enumerate}
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}[矩阵乘法]
+    对于给定的矩阵 $A=(a_{ij})_{m\times k}$，$B=(b_{ij})_{k\times n}$，定义矩阵的乘积为 $C = A\cdot B$ 为 $m\times n$ 矩阵。其元素满足
+
+    \begin{equation*}
+        c_{ij}=\sum_{r=1}^{k}a_{ir}b_{rj}= a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots +a_{ik}b_{kj}.
+    \end{equation*}
+\end{definition}
+
+\begin{enumerate}
+    \item 显然，矩阵 $A$ 与 $B$ 的乘积有意义时，$A$ 的列数必须等于 $B$ 的行数，且 $A\cdot B = C$ 的行数等于 $A$ 的行数，列数等于 $B$ 的列数。
+    
+    \begin{equation*}
+        A\cdot B = 
+        \left[
+            \begin{matrix}
+                a_{11} & a_{12} &a_{13}&\cdots &a_{1k}\\
+                \vdots & \vdots &\vdots&\vdots &\vdots\\
+                \underline{a_{i1}} & \underline{a_{i2}} &\underline{a_{i3}}&\cdots &\underline{a_{ik}}\\
+                \vdots &\vdots  &\vdots&\vdots &\vdots\\
+                a_{m1} & a_{m2} &a_{m3}&\cdots &a_{mk}\\
+            \end{matrix}
+        \right] \cdot \left[
+            \begin{matrix}
+                b_{11} &\cdots &\underline{b_{1j}} &\cdots &b_{1n}\\
+                b_{21} &\cdots &\underline{b_{2j}} &\cdots &b_{2n}
+                \\
+                b_{31} &\cdots &\underline{b_{3j}} &\cdots &b_{3n}\\
+                \vdots &\vdots &\vdots &\vdots &\vdots\\
+                b_{k1} &\cdots &\underline{b_{kj}} &\cdots &b_{kn}\\
+            \end{matrix}
+        \right]
+    \end{equation*}
+    \item 显然，$A\cdot B$的第 $(i,j)$ 元素为 $A$ 的第 $i$ 行与 $B$ 的第 $j$ 列对应元素乘积之和。
+    \item 需要特别注意的是，矩阵乘法一般不满足交换律。而且即使 $A\cdot B$ 与 $B\cdot A$ 均有意义，二者也不见得是相等的。    
+\end{enumerate}
+
+\begin{example}
+    \begin{equation*}
+    \left[ \begin{matrix}
+        1&		0&		1\\
+        2&		1&		0\\
+    \end{matrix} \right] \cdot \left[ \begin{matrix}
+        1&		0&		1&		1\\
+        1&		1&		2&		-1\\
+        -1&		0&		-1&		0\\
+    \end{matrix} \right] =\left[ \begin{matrix}
+        0&		0&		0&		1\\
+        3&		1&		4&		1\\
+    \end{matrix} \right].
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    给定两个矩阵 $A=\left[ \begin{matrix}1&1&1\\\end{matrix} \right] ,B=\left[ \begin{array}{c}1\\1\\1\\\end{array} \right]$，分别求解 $A\cdot B$、$B\cdot A$.
+\end{example}
+\begin{proof}[求解]
+    \begin{equation*}
+        A\cdot B  = \left[ 1\right],~
+        B\cdot A = \left[
+            \begin{matrix}
+                1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1\\ 
+            \end{matrix}
+        \right]\Rightarrow A\cdot B \ne B \cdot A.
+    \end{equation*}
+\end{proof}
+
+\begin{example}
+    给定两个矩阵\footnote{可以看到，两个非零矩阵相乘，结果可能是零矩阵。} $A = \left[\begin{matrix}0 & 1 \\ 0 & 0\\\end{matrix}\right],B = \left[\begin{matrix}0 & 0 \\ 0 & 1\\\end{matrix}\right]$，分别求解 $A\cdot B$、$B\cdot A$.
+\end{example}
+\begin{proof}[求解]
+    \begin{equation*}
+        A\cdot B = \left[
+            \begin{matrix}
+                0 & 0 \\ 0 & 1\\
+            \end{matrix}
+        \right],~
+        B \cdot A = \left[
+            \begin{matrix}
+                0 & 0 \\ 0 & 0 \\
+            \end{matrix}
+        \right]\Rightarrow A\cdot B \ne B \cdot A.
+    \end{equation*}
+\end{proof}
+
+\newpage
+
+\begin{theorem}[矩阵乘法的性质] 对于给定的矩阵 $A,B,C$，常数 $k$，有以下性质
+    \begin{enumerate}
+        \item 结合律：$(A\cdot B)\cdot C = A \cdot (B \cdot C)$.
+        \item 左分配律：$(A+B)\cdot C = A\cdot C + B \cdot C$.
+        \item 右分配律：$A\cdot (B+C) = A\cdot B + A \cdot C$.
+        \item 乘法对数乘的相容性：
+        \begin{equation*}
+            k\cdot (A\cdot B) = (k\cdot A)\cdot B = A\cdot (k\cdot B),
+        \end{equation*}
+        \item 单位元：
+        \begin{equation*}
+            I_{m}\cdot A_{m\times n} = A_{m\times n},~ A_{m\times n}\cdot I_{n} = A_{mm\times n}.
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}[证明]$\qquad$
+    \begin{enumerate}
+        \item 结合律。一般地，设 $A= (a_{ij})_{m\times n},B = (b_{ij})_{n\times p},C = (c_{ij})_{p\times q}$.要证明 $(A\cdot B)\cdot C = A\cdot (B \cdot C)$，只需证明
+        
+        \begin{equation*}
+            ((AB)C)(i,j) = (A(BC))(i,j),~\forall 1\le i\le m,1\le j \le q.
+        \end{equation*}
+
+        显然，一方面有
+        \begin{equation*}
+            (AB)C(i,j) = \sum_{r=1}^{p}(AB)(i,r)C(r,j) = \sum_{r=1}^{p}(AB)(i,r)c_{rj},
+        \end{equation*}
+        \begin{equation*}
+            (AB)(i,r) = \sum_{s=1}^{n}A(i,s)B(s,r)=\sum_{s=1}^{n}a_{is}b_{sr}.
+        \end{equation*}
+        于是，有
+        \begin{equation*}
+            (AB)C(i,j) = \sum_{r=1}^{p}\left( \sum_{s=1}^{n} a_{is}b_{sr}\right)c_{rj}.
+        \end{equation*}
+        另一方面，有
+        \begin{equation*}
+            (A(BC))(i,j) = \sum_{s=1}^{n}A(i,s)(BC)(s,j)=\sum_{s=1}^{n}a_{is}(BC)(s.j),
+        \end{equation*}
+        \begin{equation*}
+            (BC)(s,j) = \sum_{r=1}^{p}B(s,r)C(r,j)=\sum_{r=1}^{n}b_{sr}c_{rj}.
+        \end{equation*}
+        于是，有
+        \begin{equation*}
+            A(BC)(i,j) = \sum_{s=1}^{n}a_{is}\left(\sum_{r=1}^{p}b_{sr}c_{rj}\right).
+        \end{equation*}
+        显然
+        \begin{equation*}
+            \sum_{r=1}^{p}\left( \sum_{s=1}^{n} a_{is}b_{sr}\right)c_{rj} = \sum_{s=1}^{n}a_{is}\left(\sum_{r=1}^{p}b_{sr}c_{rj}\right),
+        \end{equation*}
+        亦即 $(AB)C = A(BC)$.
+    \end{enumerate}
+\end{proof}
+
+关于矩阵乘法的性质，作以下补充说明：
+
+\begin{enumerate}
+    \item 结合律
+    \begin{enumerate}
+        \item 基于乘法的结合律，$(AB)C = A(BC)$，可以直接记作 ``$ABC$''，无所谓括号，且其 $(i,j)$元素为 
+        \begin{equation*}
+            \sum_{r=1}^{p}\sum_{s=1}^{n}a_{is}b_{sr}c_{rj}.
+        \end{equation*}
+        \item 推广至有限多个矩阵相乘：对于 $A_{1},A_{2},\cdots,A_{n}$ 而言，有乘积
+        \begin{equation*}
+            A_1A_2\cdots A_n.
+        \end{equation*}
+    \end{enumerate}
+\end{enumerate}
+
+\begin{definition}[乘方]$\quad$
+    \begin{enumerate}
+        \item 设 $A$ 为 $n$ 级方阵，定义 $A^2:=A\cdot A$；
+        \item $\forall k \ge 1$，定义 $A^{k}:=\underset{k\text{个}}{\underbrace{A\cdot A\cdots A}}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[乘方的性质]$\qquad$
+    \begin{enumerate}
+        \item $A^r \cdot A^s = A^{r+s}$；
+        \item $(A^r)^s = A^{rs}$.
+    \end{enumerate}
+\end{theorem}
+
+关于矩阵的乘方，作以下补充说明：设 $A,B,C$ 均为 $n$ 级方阵，则
+
+\begin{enumerate}
+    \item 一般而言，
+    \begin{equation*}
+        (AB)^r = \underset{r\text{个}}{\underbrace{(AB)(AB)\cdots (AB)}}\ne A^r B^r.
+    \end{equation*}
+    \item 矩阵乘法不普遍地满足交换律，但存在满足交换律的特例：
+    \begin{enumerate}
+        \item $A\cdot A = A\cdot A = A^2,~A\cdot I_n = I_n \cdot A = A$.
+        \item 对于任一常数 $c$ 与 $n$ 级单位阵 $I_n$，可定义纯量阵：$c\cdot I_n$，显然 $A$ 与 $c\cdot I_n$满足交换律：
+        \begin{equation*}
+            A\cdot \left( c\cdot I_n\right) = \left(c\cdot I_n\right) \cdot A = c\cdot A.
+        \end{equation*}
+        进一步地，有二项式定理
+        \begin{equation*}
+            \left(c\cdot I_n + A\right)^m = c^m I_n + C_{m}^{1}c^{m-1}A + C_{m}^{2}c^{m-2}A^2+\cdots + C_{m}^{m}A^{m}.
+        \end{equation*}
+    \end{enumerate}
+    \item 若 $AB=BA$，即满足交换律，则 $(AB)^r = A^rB^r$. 特别地有二项式定理
+    \begin{equation*}
+        (A+B)^m = C_{m}^{0}A^m + C_{m}^{1}A^{m-1}B + C_{m}^{2}A^{m-2}B^2+\cdots + C_{m}^{m}B^m.
+    \end{equation*}
+    \item 矩阵乘法不普遍地满足消去律。即 $AB=AC,A\ne 0\nRightarrow B=C$. 因为整性\footnote{$a\ne 0,b\ne 0\Rightarrow a\cdot b \ne 0$.}不成立。
+\end{enumerate}
+
+\begin{definition}[转置]
+    设 $A = (a_{ij})_{m\times n}$，则定义 $A$ 的转置为 $n\times m$ 矩阵，记作 $A^T$ 或 $A^{\prime}$，且有 $A^{\prime} = (b_{ij})_{n\times m}$，其中 $b_{ij}=a_{ji}$，$\forall 1\le i\le m,1\le j\le n$.
+
+    \begin{equation*}
+        A = \left[
+            \begin{matrix}
+                a_{11} & a_{12} & \cdots & a_{1n}\\
+                a_{21} & a_{22} & \cdots & a_{2n}\\
+                \vdots & \vdots & \ddots &\vdots\\
+                a_{m1} & a_{m2} & \cdots & a_{mn}\\
+            \end{matrix}
+        \right]\Rightarrow 
+        A^{\prime} = \left[
+            \begin{matrix}
+                a_{11} & a_{21} &\cdots & a_{m1}\\
+                a_{12} & a_{22} &\cdots & a_{m2}\\
+                \vdots & \vdots &\ddots & \vdots\\
+                a_{1n} & a_{2n} & \cdots & a_{mn}\
+            \end{matrix}
+        \right].
+    \end{equation*}
+\end{definition}
+
+关于矩阵的转置，做以下补充说明：
+
+\begin{enumerate}
+    \item 矩阵 $A$ 的第 $i$ 行，即为 $A^{\prime}$ 的第 $j$ 列；矩阵 $A$ 的第 $j$ 列，即为 $A^{\prime}$ 的第 $j$ 行。
+    \item 若 $A^{\prime} = A$，显然 $A$ 与 $A^{\prime}$ 均为方阵，称 $A$ 为对称阵；
+    \item 若 $A^{\prime} = -A$，显然 $A$ 与 $A^{\prime}$ 均为方阵，称 $A$ 为斜对称阵，或反对称阵；
+\end{enumerate}
+
+\begin{theorem}[矩阵转置的性质]$\qquad$
+    \begin{enumerate}
+        \item $(A^{\prime})^{\prime} = A$.
+        \item $(A+B)^{\prime} = A^{\prime} + B^{\prime}$.
+        \item $(c\cdot A)^{\prime} = c\cdot A^{\prime}$.
+        \item $(AB)^{\prime} = B^{\prime}A^{\prime}$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{example}
+$A = \left[\begin{matrix}1&3\\3&2\\\end{matrix}\right]\Rightarrow A^{\prime} = \left[\begin{matrix}1&3\\3&2\\\end{matrix}\right]=A$，所以 $A$ 是对称阵。
+\end{example}
+
+\begin{example}
+$A = \left[\begin{matrix}0&1\\-1&0\\\end{matrix}\right]\Rightarrow A^{\prime} = \left[\begin{matrix}0&-1\\1&0\\\end{matrix}\right]=-A$，所以 $A$ 是斜对称阵。
+\end{example}
+
+\begin{definition}[复矩阵的共轭矩阵]
+    一般地，设 $A=(a_{ij})_{m\times n}$ 为复矩阵，则定义其共轭矩阵为 $\overline A = (b_{ij})_{m\times n}$，且有 $b_{ij} = \overline{a_{ij}},\forall 1\le i \le m,1\le j \le n$.
+\end{definition}
+
+\begin{theorem}[共轭矩阵的性质]$\qquad$
+\begin{enumerate}
+    \item $\overline{\overline{A}} = A$.
+    \item $\overline{A+B} = \overline{A} + \overline{B}$.
+    \item $\overline{c\cdot A} = \overline{c}\cdot \overline{A}$.
+    \item $\overline{AB} = \overline{A}\overline{B}$.
+    \item $(\overline{A})^{\prime} = \overline{A^{\prime}}$.
+\end{enumerate}
+\end{theorem}
+
+\end{document}
